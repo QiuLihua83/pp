@@ -2,9 +2,10 @@
 
 
 #include <stdlib.h>
+#include <iostream>
 
-
-void main()
+int main()
 {
-	return;
+	std::cout << "Hello, andy qiu." <<  std::endl;
+	return 0;
 }
