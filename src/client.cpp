@@ -23,6 +23,7 @@ int main()
     }
     std::cout << "connect to server succed! nret = " << nret << std::endl;
 
+    close(fd);
 
 	return 0;
 }
