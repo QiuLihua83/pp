@@ -5,5 +5,6 @@ clean:
 
 all:
 	-rm *.o
-	g++ main.cpp -o main 
+	g++ server.cpp -o server
+	g++ client.cpp -o client
 
