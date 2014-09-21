@@ -23,6 +23,25 @@ int main()
     }
     std::cout << "connect to server succed! nret = " << nret << std::endl;
 
+    SMsg msg;
+    msg.nSKey = htonl(SKEY);
+    msg.nMsgType = htonl(ETMSY_HELLO);
+    msg.nMsgLen = htonl(sizeof(msg));
+    msg.nData = htonl(789654);
+
+	while (1)
+	{
+		ssize_t zret = 0;
+
+		zret = send(fd, (void *) (&msg), sizeof(msg), 0);
+		if (-1 == zret) {
+			std::cerr << "error!!! send msg to server failed! nret = " << nret
+					<< std::endl;
+			exit(1);
+		}
+		std::cout << "send msg to server succed! zret = " << zret << std::endl;
+		sleep(2);
+	}
     close(fd);
 
 	return 0;

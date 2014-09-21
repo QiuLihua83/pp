@@ -1,7 +1,7 @@
 
 #include "comm.h"
 
-
+void chidprocess(int confd);
 
 int main()
 {
@@ -29,10 +29,39 @@ int main()
     	clilen = sizeof(cliaddr);
     	confd = accept(lstfd,(struct sockaddr *)&(cliaddr), &clilen);
         std::cout << "client fd = " << confd << std::endl;
-
+        chdpid = fork();
+        if (0 == chdpid)
+        {
+        	close(lstfd);
+        	chidprocess(confd);
+        	exit(0);
+        }
+        close(confd);
     }
 
 
 
 	return 0;
 }
+
+void chidprocess(int confd)
+{
+	ssize_t  n = 0;
+	const int MAX_READLEN = 1024;
+	char buf[MAX_READLEN];
+
+	std::cout << "Entering chidprocess(). client fd = " << confd << std::endl;
+    while(1)
+    {
+    	memset(buf, sizeof(buf), 0);
+        n = recv(confd, (void *)&buf, sizeof(buf), 0);
+        if(-1 == n)
+        {
+			std::cerr << "error!!! recv msg from client failed! nret = " << n << std::endl;
+			exit(1);
+        }
+        std::cout << "recv msg from client succed! msg len = " << n << std::endl;
+    }
+}
+
+
