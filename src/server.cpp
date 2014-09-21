@@ -2,6 +2,7 @@
 #include "comm.h"
 
 void chidprocess(int confd);
+bool msgdeal(const char * pc);
 
 int main()
 {
@@ -50,18 +51,47 @@ void chidprocess(int confd)
 	const int MAX_READLEN = 1024;
 	char buf[MAX_READLEN];
 
-	std::cout << "Entering chidprocess(). client fd = " << confd << std::endl;
+	std::cout << "pid[" <<getpid() << "]Entering chidprocess(). client fd = " << confd << std::endl;
     while(1)
     {
     	memset(buf, sizeof(buf), 0);
         n = recv(confd, (void *)&buf, sizeof(buf), 0);
         if(-1 == n)
         {
-			std::cerr << "error!!! recv msg from client failed! nret = " << n << std::endl;
+			std::cerr << "pid[" <<getpid() << "]error!!! recv msg from client failed! nret = " << n << std::endl;
 			exit(1);
         }
-        std::cout << "recv msg from client succed! msg len = " << n << std::endl;
+        std::cout << "pid[" <<getpid() << "]recv msg from client succed! msg len = " << n << std::endl;
+        if(n < sizeof(SMsg))
+        {
+			std::cerr << "pid[" <<getpid() << "]error!!! recv invalid msg from client ! msg len =  = " << n << std::endl;
+			exit(1);
+        }
+        msgdeal(buf);
     }
+}
+
+bool msgdeal(const char * pc)
+{
+	const SMsg * pm = (SMsg*)pc;
+	SMsg  m = * pm;
+
+	if(NULL == pm)
+	{
+		std::cerr << "pid[" <<getpid() << "]error!!! null msg." << std::endl;
+		return false;
+	}
+
+    m.nSKey = ntohl(m.nSKey);
+    m.nMsgType = ntohl(m.nMsgType);
+    m.nMsgLen = ntohl(m.nMsgLen);
+    m.nData = ntohl(m.nData);
+    std::cout << "pid[" <<getpid() << "]msg :nSKey = " << m.nSKey
+    		<< " nMsgType = " << m.nMsgType
+    		<< " nMsgLen = " << m.nMsgLen
+    		<< " nData = " << m.nData << std::endl;
+
+	return true;
 }
 
 

@@ -39,7 +39,7 @@ int main()
 					<< std::endl;
 			exit(1);
 		}
-		std::cout << "send msg to server succed! zret = " << zret << std::endl;
+		std::cout << "pid[" <<getpid() << "]send msg to server succed! zret = " << zret << std::endl;
 		sleep(2);
 	}
     close(fd);
