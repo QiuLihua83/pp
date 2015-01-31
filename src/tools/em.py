@@ -26,8 +26,14 @@ def send_txt_email():
     #邮件标题
     subject = '您好，这是合同范本，敬请过目'
     
-    msg = MIMEText('您好，附件是合同范本，敬请过目','text','utf-8')  #中文需参数‘utf-8'，单字节字符不需要
-    msg['Subject'] = Header(subject, 'utf-8')
+    #组合邮件
+    msg = MIMEMultipart('alternative')
+    msg['Subject'] = subject 
+    
+    txt = MIMEText('您好，附件是合同范本，敬请过目','text','utf-8')  #中文需参数‘utf-8'，单字节字符不需要
+    #msg['Subject'] = Header(subject, 'utf-8')
+    
+    msg.attach(txt)
     
     smtp = smtplib.SMTP()
     smtp.connect(smtpserver)
