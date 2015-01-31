@@ -15,16 +15,16 @@ import smtplib
 
 
 
-def send_txt_email():
+def send_attach_email(sender, receivers, subject, filepath, filename):
     #邮件发送者
-    sender = 'qiulihua83@163.com'
+    #sender = 'qiulihua83@163.com'
     smtpserver = 'smtp.163.com'
     username = 'qiulihua83@163.com'
     password = 'qlhg_831105'
     #邮件接收者
-    receiver = 'qiulihua83@qq.com'
+    #receivers = 'qiulihua83@qq.com'
     #邮件标题
-    subject = '您好，这是合同范本，敬请过目'
+    #subject = '您好，这是合同范本，敬请过目'
     
     #组合邮件
     msg = MIMEMultipart('alternative')
@@ -34,22 +34,30 @@ def send_txt_email():
     msg.attach(txt)
     
     #构造附件
-    att = MIMEText(open('/Users/qiulihua/Documents/pics/d043ad4bd11373f0fa6229a1a70f4bfbfbed04aa.jpg', 'rb').read(), 'base64', 'utf-8')
+    att = MIMEText(open(filepath, 'rb').read(), 'base64', 'utf-8')
     att["Content-Type"] = 'application/octet-stream'
-    att["Content-Disposition"] = 'attachment; filename="d043ad4bd11373f0fa6229a1a70f4bfbfbed04aa.jpg"'
+    att["Content-Disposition"] = 'attachment; filename="' + filename + '"'
     msg.attach(att)
     
     
     smtp = smtplib.SMTP()
     smtp.connect(smtpserver)
     smtp.login(username, password)
-    smtp.sendmail(sender, receiver, msg.as_string())
+    smtp.sendmail(sender, receivers, msg.as_string())
     smtp.quit()
 
 
 if __name__ == "__main__":
     print "in main. begin...."
     
-    send_txt_email();
+    sender = 'qiulihua83@163.com'
+    receivers = 'qiulihua83@qq.com'
+    subject = '您好，这是合同范本，敬请过目'
+    filepath = '/Users/qiulihua/Downloads/meiwei-qizi.torrent'
+    filename = 'meiwei-qizi.torrent'
+    
+    send_attach_email(sender=sender, receivers=receivers, subject=subject,filepath=filepath, filename=filename);
     
     print "in main.  end....."
+    
+    
