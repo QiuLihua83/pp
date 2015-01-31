@@ -16,15 +16,17 @@ import smtplib
 
 
 def send_txt_email():
-
+    #邮件发送者
     sender = 'qiulihua83@163.com'
-    receiver = 'qiulihua83@qq.com'
-    subject = 'python email test'
     smtpserver = 'smtp.163.com'
     username = 'qiulihua83@163.com'
     password = 'qlhg_831105'
+    #邮件接收者
+    receiver = 'qiulihua83@qq.com'
+    #邮件标题
+    subject = '您好，这是合同范本，敬请过目'
     
-    msg = MIMEText('你好','text','utf-8')  #中文需参数‘utf-8'，单字节字符不需要
+    msg = MIMEText('您好，附件是合同范本，敬请过目','text','utf-8')  #中文需参数‘utf-8'，单字节字符不需要
     msg['Subject'] = Header(subject, 'utf-8')
     
     smtp = smtplib.SMTP()
