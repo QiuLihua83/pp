@@ -3,4 +3,4 @@
 *.pyc
 *.project
 *.sqlite3
-
+.settings/
