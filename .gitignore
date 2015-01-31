@@ -1,6 +1,6 @@
-.project
-.pydevproject
-.pyc
-.project
-
+*.project
+*.pydevproject
+*.pyc
+*.project
+*.sqlite3
 
