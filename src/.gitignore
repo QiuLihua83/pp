@@ -4,4 +4,4 @@ main
 ../.cproject
 server
 client
-
+*.pyc
