@@ -7,6 +7,7 @@ from email.MIMEText import MIMEText
 from email.MIMEImage import MIMEImage
 from email.header import Header
 import smtplib
+from time import sleep
 
 #===================================================================================================
 # import smtplib,email,sys  
@@ -39,7 +40,6 @@ def send_attach_email(sender, receivers, subject, filepath, filename):
     att["Content-Disposition"] = 'attachment; filename="' + filename + '"'
     msg.attach(att)
     
-    
     smtp = smtplib.SMTP()
     smtp.connect(smtpserver)
     smtp.login(username, password)
@@ -51,12 +51,18 @@ if __name__ == "__main__":
     print "in main. begin...."
     
     sender = 'qiulihua83@163.com'
-    receivers = 'qiulihua83@qq.com'
+    receivers = 'qiulihua83@qq.com'   #['qiulihua83@qq.com', 'qiulihua83@sohu.com']
     subject = '您好，这是合同范本，敬请过目'
     filepath = '/Users/qiulihua/Downloads/meiwei-qizi.torrent'
     filename = 'meiwei-qizi.torrent'
     
-    send_attach_email(sender=sender, receivers=receivers, subject=subject,filepath=filepath, filename=filename);
+    MAX_TIMES = 20
+    index = 0
+    while(index < MAX_TIMES):
+        send_attach_email(sender=sender, receivers=receivers, subject=subject,filepath=filepath, filename=filename);
+        print "the email %d  sent...\n" % (index)
+        sleep(10)
+        index = index + 1
     
     print "in main.  end....."
     
