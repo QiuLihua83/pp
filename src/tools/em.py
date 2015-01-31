@@ -31,9 +31,14 @@ def send_txt_email():
     msg['Subject'] = subject 
     
     txt = MIMEText('您好，附件是合同范本，敬请过目','text','utf-8')  #中文需参数‘utf-8'，单字节字符不需要
-    #msg['Subject'] = Header(subject, 'utf-8')
-    
     msg.attach(txt)
+    
+    #构造附件
+    att = MIMEText(open('/Users/qiulihua/Documents/pics/d043ad4bd11373f0fa6229a1a70f4bfbfbed04aa.jpg', 'rb').read(), 'base64', 'utf-8')
+    att["Content-Type"] = 'application/octet-stream'
+    att["Content-Disposition"] = 'attachment; filename="d043ad4bd11373f0fa6229a1a70f4bfbfbed04aa.jpg"'
+    msg.attach(att)
+    
     
     smtp = smtplib.SMTP()
     smtp.connect(smtpserver)
