@@ -56,12 +56,13 @@ if __name__ == "__main__":
     filepath = '/Users/qiulihua/Downloads/meiwei-qizi.torrent'
     filename = 'meiwei-qizi.torrent'
     
+    SLEEP_SECS = 5
     MAX_TIMES = 20
     index = 0
     while(index < MAX_TIMES):
         send_attach_email(sender=sender, receivers=receivers, subject=subject,filepath=filepath, filename=filename);
         print "the email %d  sent...\n" % (index)
-        sleep(10)
+        sleep(SLEEP_SECS)
         index = index + 1
     
     print "in main.  end....."
