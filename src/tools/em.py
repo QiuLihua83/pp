@@ -16,17 +16,13 @@ from time import sleep
 
 
 
-def send_attach_email(sender, receivers, subject, filepath, filename):
+def send_attach_email(sender, pwd, receivers, subject, filepath, filename):
     #邮件发送者
-    #sender = 'qiulihua83@163.com'
     smtpserver = 'smtp.163.com'
-    username = 'qiulihua83@163.com'
-    password = 'qlhg_831105'
-    #邮件接收者
-    #receivers = 'qiulihua83@qq.com'
-    #邮件标题
-    #subject = '您好，这是合同范本，敬请过目'
+    username = sender
+    password = pwd
     
+    print "sender=%s, username=%s, password=%s, receivers=%s" %(sender, username, password, receivers)
     #组合邮件
     msg = MIMEMultipart('alternative')
     msg['Subject'] = subject 
@@ -51,6 +47,7 @@ if __name__ == "__main__":
     print "in main. begin...."
     
     sender = 'qiulihua83@163.com'
+    pwd = 'qlhg_831105'
     receivers = 'qiulihua83@qq.com'   #['qiulihua83@qq.com', 'qiulihua83@sohu.com']
     subject = '您好，这是合同范本，敬请过目'
     filepath = '/Users/qiulihua/Downloads/meiwei-qizi.torrent'
@@ -60,7 +57,7 @@ if __name__ == "__main__":
     MAX_TIMES = 20
     index = 0
     while(index < MAX_TIMES):
-        send_attach_email(sender=sender, receivers=receivers, subject=subject,filepath=filepath, filename=filename);
+        send_attach_email(sender=sender, pwd=pwd, receivers=receivers, subject=subject,filepath=filepath, filename=filename);
         print "the email %d  sent...\n" % (index)
         sleep(SLEEP_SECS)
         index = index + 1
