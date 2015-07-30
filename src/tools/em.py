@@ -46,15 +46,15 @@ def send_attach_email(sender, pwd, receivers, subject, filepath, filename):
 if __name__ == "__main__":
     print "in main. begin...."
     
-    sender = 'qiulihua83@163.com'
-    pwd = 'qlhg_831105'
-    receivers = 'qiulihua83@qq.com'   #['qiulihua83@qq.com', 'qiulihua83@sohu.com']
-    subject = '您好，这是合同范本，敬请过目'
-    filepath = '/Users/qiulihua/Downloads/meiwei-qizi.torrent'
-    filename = 'meiwei-qizi.torrent'
+    sender = 'sleepwithu@163.com'
+    pwd = '056239'
+    receivers =  'lix@dayxar.com'   #'qiulihua83@qq.com'
+    subject = '我和王总把草稿打好了，麻烦看一下是否合适，谢谢'
+    filepath = '/Users/qiulihua/Desktop/31.zip'
+    filename = '31.zip'
     
-    SLEEP_SECS = 5
-    MAX_TIMES = 20
+    SLEEP_SECS = 1800
+    MAX_TIMES = 100
     index = 0
     while(index < MAX_TIMES):
         send_attach_email(sender=sender, pwd=pwd, receivers=receivers, subject=subject,filepath=filepath, filename=filename);
