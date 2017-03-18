@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/qiulihua/git/pp/cpp/ballthrow/main.cpp
+iostream
+-
+sstream
+-
+stack
+-
+vector
+-
+string
+-
+
