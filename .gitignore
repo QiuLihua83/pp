@@ -5,3 +5,7 @@
 *.project
 *.sqlite3
 ./.settings/*
+/Debug/
+.idea
+.cproject
+

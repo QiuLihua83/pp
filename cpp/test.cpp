@@ -7,12 +7,31 @@ int sum();
 bool  chksudoku();
 bool chksdk(char ch, char * used);
 void resetused(char *used);
+int rmduplicates();
 
 int main()
 {
     std::cout << "hello, world!" << std::endl;
-    sum();
-    chksudoku();
+    rmduplicates();
+    //sum();
+    //chksudoku();
+}
+
+int rmduplicates()
+{
+	int index = 0;
+    int arr[] = {1,2,2,2,3,3,4,5,6,6,7,8,10,11,11,12};
+    std::cout << "Before rm len of arr is : " << sizeof(arr)/sizeof(int) <<std::endl;
+    for(int i=1; i<(sizeof(arr)/sizeof(int));i++)
+    {
+    	if(arr[index] != arr[i])
+    	{
+    		arr[++index] = arr[i];
+    	}
+    }
+
+    std::cout << "Length of arr after rm is : " << index+1 << std::endl;
+	return index;
 }
 
 bool chksudoku()
